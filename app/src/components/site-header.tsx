@@ -15,15 +15,10 @@ export function SiteHeader() {
       <div className="mx-auto max-w-6xl px-5 py-3 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2 group">
           <span className="grid place-items-center size-9 rounded-full bg-[color:var(--color-wood)] text-[color:var(--color-cream)] shadow-sm">
-            <Icon icon="mdi:music-clef-treble" className="text-lg" />
+            <Icon icon="game-icons:pan-flute" className="text-lg" />
           </span>
-          <span className="leading-tight">
-            <span className="block font-display text-[15px] font-bold text-[color:var(--color-wood)]">
-              {profile.stageName}
-            </span>
-            <span className="block text-[11px] text-[color:var(--color-ink-soft)]">
-              팬플룻 연주자 · {profile.name}
-            </span>
+          <span className="font-display text-[16px] font-bold text-[color:var(--color-wood)] leading-tight">
+            {profile.stageName}
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-1 text-sm">
