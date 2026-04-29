@@ -45,3 +45,6 @@ next-env.d.ts
 /local.db
 /local.db-journal
 # /public/uploads/ 는 시드 이미지 포함 위해 커밋 허용
+
+# 민감 정보(주민번호·계좌)가 들어가는 강사 관리카드 PDF는 절대 커밋 금지
+/scripts/proposal-output/instructor-card.pdf
