@@ -30,11 +30,12 @@ const FILES: SeedFile[] = [
   {
     kind: "card",
     label: "강사 관리카드 (연주하는 꼬꼬맨 / 김춘흥)",
-    filename: "강사관리카드_연주하는꼬꼬맨_김춘흥.pdf",
-    mimeType: "application/pdf",
-    filePath: path.resolve(__dirname, "proposal-output", "instructor-card.pdf"),
+    filename: "강사관리카드_연주하는꼬꼬맨_김춘흥.docx",
+    mimeType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    filePath: path.resolve(__dirname, "proposal-output", "instructor-card.docx"),
     isPublic: false,
-    // 기존 더미 강사카드 row(s)를 삭제 대상에 포함
+    // 기존 더미/PDF 강사카드 row(s)를 삭제 대상에 포함
     replaceLabels: ["강사카드"],
   },
 ];
