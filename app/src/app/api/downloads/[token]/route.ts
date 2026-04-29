@@ -25,28 +25,44 @@ export async function GET(
     .limit(1);
   if (!file) return NextResponse.json({ ok: false }, { status: 404 });
 
-  const abs = path.isAbsolute(file.storagePath)
-    ? file.storagePath
-    : path.join(process.cwd(), file.storagePath);
+  // storagePath가 http(s):// 면 Vercel Blob, 아니면 로컬 FS
+  const isRemote = /^https?:\/\//i.test(file.storagePath);
 
-  try {
-    const data = await fs.readFile(abs);
-    await db.insert(schema.downloadLogs).values({ fileId: file.id });
-    return new NextResponse(data, {
-      status: 200,
-      headers: {
-        "Content-Type": file.mimeType,
-        "Content-Length": String(data.length),
-        "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(
-          file.filename,
-        )}`,
-        "Cache-Control": "no-store",
-      },
-    });
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "파일 본체를 찾을 수 없습니다" },
-      { status: 404 },
-    );
+  let buf: Buffer;
+  if (isRemote) {
+    const res = await fetch(file.storagePath);
+    if (!res.ok) {
+      return NextResponse.json(
+        { ok: false, error: "파일을 가져오지 못했습니다" },
+        { status: 502 },
+      );
+    }
+    buf = Buffer.from(await res.arrayBuffer());
+  } else {
+    const abs = path.isAbsolute(file.storagePath)
+      ? file.storagePath
+      : path.join(process.cwd(), file.storagePath);
+    try {
+      buf = await fs.readFile(abs);
+    } catch {
+      return NextResponse.json(
+        { ok: false, error: "파일 본체를 찾을 수 없습니다" },
+        { status: 404 },
+      );
+    }
   }
+
+  await db.insert(schema.downloadLogs).values({ fileId: file.id });
+  const body = new Uint8Array(buf);
+  return new NextResponse(body, {
+    status: 200,
+    headers: {
+      "Content-Type": file.mimeType,
+      "Content-Length": String(body.byteLength),
+      "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(
+        file.filename,
+      )}`,
+      "Cache-Control": "no-store",
+    },
+  });
 }
