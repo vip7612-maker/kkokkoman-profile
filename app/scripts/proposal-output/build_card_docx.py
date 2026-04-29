@@ -191,7 +191,7 @@ def main():
     info.alignment = WD_TABLE_ALIGNMENT.CENTER
     info.autofit = False
     # 4열 너비 합 = 17 cm (라벨 2.5 + 값 6.0)
-    apply_widths(info, [2.5, 6.0, 2.5, 6.0], row_height_cm=0.85)
+    apply_widths(info, [2.5, 6.0, 2.5, 6.0], row_height_cm=0.8)
 
     pairs = [
         ("성  명", NAME, "주민등록번호", RRN),
@@ -206,50 +206,12 @@ def main():
         cell_text(info.rows[r].cells[3], v2, size=11)
     set_table_borders(info)
 
-    # ── 근무처 표 (3행) ──
-    # 1행: [근무처(병합 좌측)][직장 lbl][직장 val][직위 lbl][직위 val][직통전화 lbl][직통전화 val]
-    # 2행: [..  좌][주소 lbl][주소 val (병합 3칸)][우편번호 lbl][우편번호 val]
-    # 3행: [..  좌][공백 lbl][공백 val][공백 lbl][공백 val][대표전화 lbl][대표전화 val]
-    # 단순화: 7열 표를 만들고 좌측 1열만 세로 병합으로 "근무처"
-    work = doc.add_table(rows=3, cols=7)
-    work.alignment = WD_TABLE_ALIGNMENT.CENTER
-    work.autofit = False
-    # 합 17 cm
-    work_cols = [1.5, 1.3, 4.7, 1.3, 2.2, 2.0, 4.0]
-    apply_widths(work, work_cols, row_height_cm=0.85)
-
-    # 좌측 세로 병합 ("근무처")
-    work_label_cell = work.rows[0].cells[0]
-    work_label_cell.merge(work.rows[1].cells[0]).merge(work.rows[2].cells[0])
-    cell_text(work_label_cell, "근 무 처", header=True, size=10)
-
-    # row 0: 직장 / 직장명 / 직위 / 직위값 / 직통전화 / 직통전화값
-    cell_text(work.rows[0].cells[1], "직장", header=True, size=10)
-    cell_text(work.rows[0].cells[2], "", size=10)
-    cell_text(work.rows[0].cells[3], "직위", header=True, size=10)
-    cell_text(work.rows[0].cells[4], "", size=10)
-    cell_text(work.rows[0].cells[5], "직통전화", header=True, size=10)
-    cell_text(work.rows[0].cells[6], "", size=10)
-
-    # row 1: 주소 / 주소(병합) / 우편번호 / 우편번호값
-    cell_text(work.rows[1].cells[1], "주소", header=True, size=10)
-    addr_merged = work.rows[1].cells[2].merge(work.rows[1].cells[3]).merge(work.rows[1].cells[4])
-    cell_text(addr_merged, "", size=10, align="left")
-    cell_text(work.rows[1].cells[5], "우편번호", header=True, size=10)
-    cell_text(work.rows[1].cells[6], "", size=10)
-
-    # row 2: 공백(병합) / 대표전화 / 대표전화값
-    blank_merged = work.rows[2].cells[1].merge(work.rows[2].cells[2]).merge(work.rows[2].cells[3]).merge(work.rows[2].cells[4])
-    cell_text(blank_merged, "", size=10)
-    cell_text(work.rows[2].cells[5], "대표전화", header=True, size=10)
-    cell_text(work.rows[2].cells[6], "", size=10)
-    set_table_borders(work)
-
-    # ── 자택 표 (2행) ──
+    # ── 자택 표 (2행) — 근무처 표는 제거 ──
+    home_cols = [1.5, 1.3, 4.7, 1.3, 2.2, 2.0, 4.0]
     home = doc.add_table(rows=2, cols=7)
     home.alignment = WD_TABLE_ALIGNMENT.CENTER
     home.autofit = False
-    apply_widths(home, work_cols, row_height_cm=0.85)
+    apply_widths(home, home_cols, row_height_cm=0.8)
 
     home_label_cell = home.rows[0].cells[0]
     home_label_cell.merge(home.rows[1].cells[0])
@@ -271,7 +233,7 @@ def main():
     edu = doc.add_table(rows=5, cols=4)
     edu.alignment = WD_TABLE_ALIGNMENT.CENTER
     edu.autofit = False
-    apply_widths(edu, [2.0, 7.0, 5.5, 2.5], row_height_cm=0.85)
+    apply_widths(edu, [2.0, 7.0, 5.5, 2.5], row_height_cm=0.7)
 
     # 좌측 5행 병합 ("학력 및 전공")
     edu_label_cell = edu.rows[0].cells[0]
@@ -299,7 +261,7 @@ def main():
     career = doc.add_table(rows=1, cols=2)
     career.alignment = WD_TABLE_ALIGNMENT.CENTER
     career.autofit = False
-    apply_widths(career, [2.0, 15.0], row_height_cm=5.0)
+    apply_widths(career, [2.0, 15.0], row_height_cm=3.6)
 
     cell_text(career.rows[0].cells[0], "주요경력", header=True, size=10)
     cell_multiline(career.rows[0].cells[1], [
@@ -310,23 +272,20 @@ def main():
         "내안에병원(정신건강의학) 정기 음악 치유 시간",
         "원주교도소, 청주여자교도소 음악·인문 강연",
         "MBC 강원365 출연 외 다수",
-    ], size=10.5)
+    ], size=9.5)
     set_table_borders(career)
 
-    # 빈 줄
-    sp = doc.add_paragraph()
-    sp.paragraph_format.space_after = Pt(0)
-
-    # ── 동의 박스 (단일 셀) ──
+    # ── 동의 박스 (단일 셀) — 한 페이지 내 컴팩트 ──
     consent = doc.add_table(rows=1, cols=1)
     consent.alignment = WD_TABLE_ALIGNMENT.CENTER
     consent.autofit = False
-    apply_widths(consent, [17.0], row_height_cm=4.0)
+    apply_widths(consent, [17.0], row_height_cm=0.5)
     set_table_borders(consent)
     consent_cell = consent.rows[0].cells[0]
     consent_cell.text = ""
 
-    def add_p(cell, text, *, size=10, bold=False, align="left", indent=0):
+    def add_p(cell, text, *, size=9, bold=False, align="left", indent=0,
+              space_before=0, space_after=0, line_pt=11):
         p = cell.add_paragraph()
         if align == "center":
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -336,46 +295,50 @@ def main():
             p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         if indent:
             p.paragraph_format.left_indent = Pt(indent)
-        p.paragraph_format.space_before = Pt(0)
-        p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.space_before = Pt(space_before)
+        p.paragraph_format.space_after = Pt(space_after)
+        # 단일 행 라인 간격
+        p.paragraph_format.line_spacing = Pt(line_pt)
         run = p.add_run(text)
         set_run_font(run, size_pt=size, bold=bold)
         return p
 
-    # 첫 단락은 cell_text와 별도로 직접 셋팅 (셀의 첫 paragraph 사용)
+    # 셀의 첫 paragraph 컴팩트 설정 후 헤더 작성
     p0 = consent_cell.paragraphs[0]
     p0.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    set_run_font(p0.add_run("■ 개인정보 수집ㆍ이용 동의"), size_pt=11, bold=True)
+    p0.paragraph_format.space_before = Pt(0)
+    p0.paragraph_format.space_after = Pt(1)
+    p0.paragraph_format.line_spacing = Pt(12)
+    set_run_font(p0.add_run("■ 개인정보 수집ㆍ이용 동의"), size_pt=10.5, bold=True)
 
-    add_p(consent_cell, "  ◇ 개인정보 수집ㆍ이용 목적: 신청접수, 연락, 수료 관리, 강사료 지급", size=9.5)
-    add_p(consent_cell, "  ◇ 수집항목: 성명, 주민등록번호, 직장명(직급/직위 포함), 주소, 연락처, 계좌번호, 경력 및 자격사항", size=9.5)
-    add_p(consent_cell, "  ◇ 보유 및 이용기간: 보존기한 내 또는 정보제공자 철회 요청까지", size=9.5)
-    add_p(consent_cell, "  ◇ 본 개인정보 수집에 대한 동의를 거부하실 수 있으며, 이 경우 강사 등록 및 강사료 지급이 제한될 수 있음", size=9.5)
+    add_p(consent_cell, "  ◇ 개인정보 수집ㆍ이용 목적: 신청접수, 연락, 수료 관리, 강사료 지급", size=8.5)
+    add_p(consent_cell, "  ◇ 수집항목: 성명, 주민등록번호, 직장명(직급/직위 포함), 주소, 연락처, 계좌번호, 경력 및 자격사항", size=8.5)
+    add_p(consent_cell, "  ◇ 보유 및 이용기간: 보존기한 내 또는 정보제공자 철회 요청까지", size=8.5)
+    add_p(consent_cell, "  ◇ 본 개인정보 수집에 대한 동의를 거부하실 수 있으며, 이 경우 강사 등록 및 강사료 지급이 제한될 수 있음", size=8.5)
 
-    # 동의 라인 (체크박스 ■ 동의 / □ 동의하지 않음)
-    add_p(consent_cell, "    개인정보 수집ㆍ이용 동의      ■ 동의       □ 동의하지 않음", size=10, align="center", bold=True)
-
-    # 날짜 (비움)
-    add_p(consent_cell, "          년       월       일", size=10, align="center")
+    add_p(consent_cell, "    개인정보 수집ㆍ이용 동의      ■ 동의       □ 동의하지 않음",
+          size=9.5, align="center", bold=True, space_before=2)
+    add_p(consent_cell, "          년       월       일", size=9.5, align="center")
 
     # 성명 + 도장
     sig_p = consent_cell.add_paragraph()
     sig_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    sig_p.paragraph_format.space_before = Pt(2)
-    sig_p.paragraph_format.space_after = Pt(2)
+    sig_p.paragraph_format.space_before = Pt(0)
+    sig_p.paragraph_format.space_after = Pt(0)
+    sig_p.paragraph_format.line_spacing = Pt(14)
     run = sig_p.add_run("성명          ")
-    set_run_font(run, size_pt=10.5)
+    set_run_font(run, size_pt=10)
     run2 = sig_p.add_run(NAME)
-    set_run_font(run2, size_pt=10.5, bold=True)
+    set_run_font(run2, size_pt=10, bold=True)
     run3 = sig_p.add_run("    (서명 또는 인) ")
-    set_run_font(run3, size_pt=10.5)
-    # 도장 이미지
+    set_run_font(run3, size_pt=10)
     if os.path.exists(STAMP):
         run4 = sig_p.add_run()
-        run4.add_picture(STAMP, width=Cm(1.4))
+        run4.add_picture(STAMP, width=Cm(1.2))
 
-    # 안내 문구
-    add_p(consent_cell, "※ 수집한 개인정보는 정보주체의 동의 없이 수집한 목적 외로 사용하거나 제3자에게 제공되지 않으며 보유 및 이용기간 만료 이후에는 파기합니다.", size=8.5)
+    add_p(consent_cell,
+          "※ 수집한 개인정보는 정보주체의 동의 없이 수집한 목적 외로 사용하거나 제3자에게 제공되지 않으며 보유 및 이용기간 만료 이후에는 파기합니다.",
+          size=7.5, space_before=1)
 
     doc.save(OUT)
     print("[ok] saved:", OUT)
