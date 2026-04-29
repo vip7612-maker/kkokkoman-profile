@@ -1,7 +1,8 @@
 import { db, schema } from "@/db/client";
-import { desc, eq } from "drizzle-orm";
+import { desc } from "drizzle-orm";
 import { formatDateKo } from "@/lib/utils";
 import { RequestStatusSelect } from "@/components/admin/request-status-select";
+import { RequestDeleteButton } from "@/components/admin/request-delete-button";
 
 export const dynamic = "force-dynamic";
 
@@ -38,7 +39,10 @@ export default async function AdminRequestsPage() {
                     {r.contactName} · {r.phone} · {r.email}
                   </div>
                 </div>
-                <RequestStatusSelect id={r.id} value={r.status} />
+                <div className="flex items-center gap-2">
+                  <RequestStatusSelect id={r.id} value={r.status} />
+                  <RequestDeleteButton id={r.id} organization={r.organization} />
+                </div>
               </div>
               <div className="mt-3 grid sm:grid-cols-3 gap-2 text-sm">
                 <div><span className="text-[color:var(--color-ink-soft)]">대상</span> {r.audience}</div>

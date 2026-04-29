@@ -24,7 +24,13 @@ export default async function AdminFilesPage() {
       <div className="mt-6">
         <FilesManager
           files={files.map((f) => ({
-            id: f.id, kind: f.kind, label: f.label, filename: f.filename, size: f.size, mimeType: f.mimeType,
+            id: f.id,
+            kind: f.kind,
+            label: f.label,
+            filename: f.filename,
+            size: f.size,
+            mimeType: f.mimeType,
+            isPublic: f.isPublic,
           }))}
         />
       </div>

@@ -59,12 +59,14 @@ export const caseImages = sqliteTable("case_images", {
 // 보호 파일
 export const secureFiles = sqliteTable("secure_files", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  kind: text("kind").notNull(), // card | bank | id
+  kind: text("kind").notNull(), // proposal | card | bank | id
   label: text("label").notNull(),
   filename: text("filename").notNull(),
   mimeType: text("mime_type").notNull(),
   size: integer("size").notNull(),
   storagePath: text("storage_path").notNull(),
+  // 공개 다운로드 (비번 불필요): 강의 제안서 등
+  isPublic: integer("is_public", { mode: "boolean" }).notNull().default(false),
   updatedAt: integer("updated_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),

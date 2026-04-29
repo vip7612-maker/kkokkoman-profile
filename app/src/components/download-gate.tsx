@@ -33,8 +33,8 @@ export function DownloadGate({ fileId, filename }: { fileId: number; filename: s
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="btn btn-primary text-sm">
-        <Icon icon="mdi:lock-outline" /> 다운로드
+      <button onClick={() => setOpen(true)} className="btn btn-primary text-xs md:text-sm shrink-0">
+        <Icon icon="mdi:lock-outline" /> <span className="hidden sm:inline">다운로드</span>
       </button>
       {open && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 backdrop-blur-sm p-4">
@@ -43,8 +43,9 @@ export function DownloadGate({ fileId, filename }: { fileId: number; filename: s
               <Icon icon="mdi:shield-key-outline" className="text-xl" />
               <h3 className="font-display text-lg font-bold">자료 다운로드</h3>
             </div>
-            <p className="text-xs text-[color:var(--color-ink-soft)] mt-1">
+            <p className="text-xs text-[color:var(--color-ink-soft)] mt-1 leading-relaxed">
               <b>{filename}</b> 파일은 비밀번호 인증이 필요합니다.
+              인증 후 24시간 이내에 다운로드하실 수 있습니다.
             </p>
             <input
               type="password"

@@ -7,7 +7,7 @@ export async function issueDownloadToken(fileId: number) {
   return await new SignJWT({ fileId })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("5m")
+    .setExpirationTime("24h")
     .sign(ENC);
 }
 

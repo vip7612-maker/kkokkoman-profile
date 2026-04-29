@@ -2,12 +2,13 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 
-type F = { id: number; kind: string; label: string; filename: string; size: number; mimeType: string };
+type F = { id: number; kind: string; label: string; filename: string; size: number; mimeType: string; isPublic: boolean };
 
 const KIND_OPTS = [
-  { v: "card", label: "강사 카드", icon: "mdi:account-box-outline" },
-  { v: "bank", label: "통장 사본", icon: "mdi:bank-outline" },
-  { v: "id", label: "신분증 사본", icon: "mdi:card-account-details-outline" },
+  { v: "proposal", label: "강의 제안서 (공개)", icon: "mdi:file-document-multiple-outline" },
+  { v: "card", label: "강사 카드 (비공개)", icon: "mdi:account-box-outline" },
+  { v: "bank", label: "통장 사본 (비공개)", icon: "mdi:bank-outline" },
+  { v: "id", label: "신분증 사본 (비공개)", icon: "mdi:card-account-details-outline" },
 ];
 
 export function FilesManager({ files }: { files: F[] }) {
@@ -70,15 +71,24 @@ export function FilesManager({ files }: { files: F[] }) {
         {files.map((f) => {
           const k = KIND_OPTS.find((o) => o.v === f.kind);
           return (
-            <div key={f.id} className="card p-4 flex items-center gap-4">
-              <div className="grid place-items-center size-12 rounded-2xl bg-[color:var(--color-cream)] text-[color:var(--color-wood)]">
+            <div key={f.id} className="card p-4 flex items-center gap-3 md:gap-4">
+              <div className="grid place-items-center size-11 md:size-12 rounded-2xl bg-[color:var(--color-cream)] text-[color:var(--color-wood)] shrink-0">
                 <Icon icon={k?.icon ?? "mdi:file-outline"} className="text-2xl" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-semibold text-[color:var(--color-wood)]">{f.label} <span className="text-xs text-[color:var(--color-ink-soft)] font-normal">· {k?.label ?? f.kind}</span></div>
-                <div className="text-xs text-[color:var(--color-ink-soft)] truncate">{f.filename} · {(f.size / 1024).toFixed(0)} KB</div>
+                <div className="font-semibold text-[color:var(--color-wood)] text-sm md:text-base flex items-center gap-2 flex-wrap">
+                  <span className="truncate">{f.label}</span>
+                  {f.isPublic ? (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">공개</span>
+                  ) : (
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800">비공개</span>
+                  )}
+                </div>
+                <div className="text-[11px] md:text-xs text-[color:var(--color-ink-soft)] truncate">
+                  {k?.label ?? f.kind} · {f.filename} · {(f.size / 1024).toFixed(0)} KB
+                </div>
               </div>
-              <button onClick={() => remove(f.id)} className="grid place-items-center size-9 rounded-lg hover:bg-rose-50 text-rose-600">
+              <button onClick={() => remove(f.id)} className="grid place-items-center size-9 rounded-lg hover:bg-rose-50 text-rose-600 shrink-0" aria-label="삭제">
                 <Icon icon="mdi:trash-can-outline" />
               </button>
             </div>
