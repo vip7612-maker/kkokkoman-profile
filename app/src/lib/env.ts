@@ -1,6 +1,6 @@
 export const env = {
   instructorEmail: process.env.INSTRUCTOR_EMAIL ?? "jaru1125@naver.com",
-  instructorName: process.env.INSTRUCTOR_NAME ?? "김춘홍 (꼬꼬맨)",
+  instructorName: process.env.INSTRUCTOR_NAME ?? "김춘흥 (꼬꼬맨)",
   resendKey: process.env.RESEND_API_KEY ?? "",
   resendFrom: process.env.RESEND_FROM ?? "onboarding@resend.dev",
   downloadPassword: process.env.DOWNLOAD_PASSWORD ?? "kkokkoman2026",

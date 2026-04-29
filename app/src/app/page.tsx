@@ -17,36 +17,36 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="mx-auto max-w-6xl px-5 pt-10 md:pt-20 pb-16">
-        <div className="grid md:grid-cols-[1.2fr_1fr] gap-10 items-center">
+      <section className="mx-auto max-w-6xl px-5 pt-8 md:pt-20 pb-12 md:pb-16">
+        <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-10 items-center">
           <div>
             <span className="chip">
               <Icon icon="mdi:music-note" /> 팬플룻 연주자
             </span>
-            <h1 className="font-display mt-5 text-4xl md:text-6xl font-bold text-[color:var(--color-wood)] leading-[1.15]">
+            <h1 className="font-display mt-4 md:mt-5 text-[2rem] sm:text-4xl md:text-6xl font-bold text-[color:var(--color-wood)] leading-[1.15]">
               음악으로 마음을<br />
               잇다, <span className="relative inline-block">
                 <span className="relative z-10">{profile.stageName}</span>
                 <span className="absolute inset-x-0 bottom-1 h-3 bg-[color:var(--color-beige)]/55 rounded-sm -z-0" />
               </span>
             </h1>
-            <p className="mt-6 text-[color:var(--color-ink-soft)] text-lg leading-relaxed max-w-xl">
+            <p className="mt-5 text-[color:var(--color-ink-soft)] text-base md:text-lg leading-relaxed max-w-xl">
               전국 팬플룻 대회 금상 30회 수상의 연주자 <b>{profile.name}</b>입니다.
               학교, 기업, 의료·교정 시설 등 어디든 찾아가 음악으로 마음을 어루만지는
               강의와 공연을 전합니다.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/request" className="btn btn-primary">
+            <div className="mt-6 md:mt-8 flex flex-wrap gap-2.5 md:gap-3">
+              <Link href="/request" className="btn btn-primary text-sm md:text-base">
                 <Icon icon="mdi:calendar-check-outline" /> 강의 요청하기
               </Link>
-              <Link href="/profile" className="btn btn-ghost">
+              <Link href="/profile" className="btn btn-ghost text-sm md:text-base">
                 <Icon icon="mdi:account-music-outline" /> 강사 프로필
               </Link>
-              <Link href="/cases" className="btn btn-ghost">
-                <Icon icon="mdi:notebook-multiple" /> 강의 사례 보기
+              <Link href="/cases" className="btn btn-ghost text-sm md:text-base">
+                <Icon icon="mdi:notebook-multiple" /> 강의 사례
               </Link>
             </div>
-            <div className="mt-10 grid grid-cols-3 max-w-md gap-3 text-center">
+            <div className="mt-8 md:mt-10 grid grid-cols-3 max-w-md gap-2 md:gap-3 text-center">
               <Stat icon="mdi:trophy-outline" value="30회" label="전국대회 금상" />
               <Stat icon="mdi:school-outline" value="9+" label="활동 기관" />
               <Stat icon="mdi:certificate-outline" value="4종" label="전문 자격" />
@@ -57,7 +57,7 @@ export default async function HomePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/uploads/profile-hero.jpg"
-                alt="팬플룻을 들고 있는 김춘홍 (꼬꼬맨)"
+                alt="팬플룻을 들고 있는 김춘흥 (꼬꼬맨)"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -122,13 +122,16 @@ export default async function HomePage() {
         )}
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 mt-24">
-        <div className="card p-8 md:p-12 bg-[color:var(--color-wood)] text-[color:var(--color-cream)] grid md:grid-cols-[1.5fr_1fr] gap-8 items-center border-transparent">
+      <section className="mx-auto max-w-6xl px-5 mt-16 md:mt-24">
+        <div
+          className="rounded-[22px] p-7 md:p-12 grid md:grid-cols-[1.5fr_1fr] gap-6 md:gap-8 items-center shadow-[var(--shadow-pop)]"
+          style={{ backgroundColor: "var(--color-wood)", color: "#FBF6EA" }}
+        >
           <div>
-            <h3 className="font-display text-3xl md:text-4xl font-bold">
+            <h3 className="font-display text-2xl md:text-4xl font-bold leading-tight" style={{ color: "#FFF6E5" }}>
               꼬꼬맨을 강사로 모셔보세요
             </h3>
-            <p className="mt-3 text-[color:var(--color-cream)]/80 leading-relaxed">
+            <p className="mt-3 leading-relaxed text-[15px] md:text-base" style={{ color: "rgba(255,246,229,0.88)" }}>
               학교, 기업, 단체, 행사 — 어디든 음악과 이야기를 들고 찾아갑니다.
               희망 일정을 자유롭게 입력해 주세요. 빠르게 회신드립니다.
             </p>
@@ -139,7 +142,12 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/downloads"
-              className="btn btn-ghost text-[color:var(--color-cream)] border-[color:var(--color-cream)]/40 hover:bg-[color:var(--color-wood-soft)]"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold border transition"
+              style={{
+                color: "#FFF6E5",
+                borderColor: "rgba(255,246,229,0.45)",
+                backgroundColor: "rgba(255,255,255,0.04)",
+              }}
             >
               <Icon icon="mdi:file-document-outline" /> 강사 자료
             </Link>
@@ -154,12 +162,12 @@ export default async function HomePage() {
 
 function Stat({ icon, value, label }: { icon: string; value: string; label: string }) {
   return (
-    <div className="card px-3 py-4">
-      <Icon icon={icon} className="mx-auto text-2xl text-[color:var(--color-beige-deep)]" />
-      <div className="mt-1 font-display text-xl font-bold text-[color:var(--color-wood)]">
+    <div className="card px-2 py-3 md:px-3 md:py-4">
+      <Icon icon={icon} className="mx-auto text-xl md:text-2xl text-[color:var(--color-beige-deep)]" />
+      <div className="mt-1 font-display text-base md:text-xl font-bold text-[color:var(--color-wood)]">
         {value}
       </div>
-      <div className="text-[11px] text-[color:var(--color-ink-soft)]">{label}</div>
+      <div className="text-[10px] md:text-[11px] text-[color:var(--color-ink-soft)] leading-tight">{label}</div>
     </div>
   );
 }

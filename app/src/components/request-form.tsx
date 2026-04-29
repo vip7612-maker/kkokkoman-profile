@@ -111,43 +111,59 @@ export function RequestForm() {
           {dates.map((row, i) => (
             <div
               key={i}
-              className="grid sm:grid-cols-[1fr_1fr_1fr_1.4fr_auto] gap-2 items-center p-3 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-cream)]/40"
+              className="p-3 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-cream)]/40"
             >
-              <input
-                type="date"
-                value={row.date}
-                onChange={(e) => updateRow(i, { date: e.target.value })}
-                className={inputCls}
-              />
-              <input
-                type="time"
-                value={row.timeFrom}
-                onChange={(e) => updateRow(i, { timeFrom: e.target.value })}
-                className={inputCls}
-                placeholder="시작"
-              />
-              <input
-                type="time"
-                value={row.timeTo}
-                onChange={(e) => updateRow(i, { timeTo: e.target.value })}
-                className={inputCls}
-                placeholder="종료"
-              />
-              <input
-                value={row.location}
-                onChange={(e) => updateRow(i, { location: e.target.value })}
-                className={inputCls}
-                placeholder="장소(선택)"
-              />
-              <button
-                type="button"
-                onClick={() => removeRow(i)}
-                className="grid place-items-center size-9 rounded-full text-[color:var(--color-ink-soft)] hover:bg-white"
-                aria-label="일정 삭제"
-                disabled={dates.length === 1}
-              >
-                <Icon icon="mdi:trash-can-outline" />
-              </button>
+              <div className="flex items-center justify-between mb-2 sm:hidden">
+                <span className="text-xs font-semibold text-[color:var(--color-wood)]">
+                  일정 {i + 1}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => removeRow(i)}
+                  className="text-xs text-[color:var(--color-ink-soft)] inline-flex items-center gap-1 hover:text-rose-600 disabled:opacity-30"
+                  aria-label="일정 삭제"
+                  disabled={dates.length === 1}
+                >
+                  <Icon icon="mdi:trash-can-outline" /> 삭제
+                </button>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-[1fr_1fr_1fr_1.4fr_auto] gap-2 items-center">
+                <input
+                  type="date"
+                  value={row.date}
+                  onChange={(e) => updateRow(i, { date: e.target.value })}
+                  className={`${inputCls} col-span-2 sm:col-span-1`}
+                />
+                <input
+                  type="time"
+                  value={row.timeFrom}
+                  onChange={(e) => updateRow(i, { timeFrom: e.target.value })}
+                  className={inputCls}
+                  placeholder="시작"
+                />
+                <input
+                  type="time"
+                  value={row.timeTo}
+                  onChange={(e) => updateRow(i, { timeTo: e.target.value })}
+                  className={inputCls}
+                  placeholder="종료"
+                />
+                <input
+                  value={row.location}
+                  onChange={(e) => updateRow(i, { location: e.target.value })}
+                  className={`${inputCls} col-span-2 sm:col-span-1`}
+                  placeholder="장소(선택)"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeRow(i)}
+                  className="hidden sm:grid place-items-center size-9 rounded-full text-[color:var(--color-ink-soft)] hover:bg-white"
+                  aria-label="일정 삭제"
+                  disabled={dates.length === 1}
+                >
+                  <Icon icon="mdi:trash-can-outline" />
+                </button>
+              </div>
             </div>
           ))}
         </div>

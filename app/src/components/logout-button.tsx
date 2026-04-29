@@ -9,7 +9,7 @@ export function LogoutButton() {
   return (
     <button
       onClick={logout}
-      className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[color:var(--color-wood-soft)] hover:bg-black/20 text-sm"
+      className="w-full md:w-full inline-flex items-center justify-center gap-1.5 px-3 py-1.5 md:py-2 rounded-lg bg-[color:var(--color-wood-soft)] hover:bg-black/20 text-xs md:text-sm whitespace-nowrap"
     >
       <Icon icon="mdi:logout-variant" /> 로그아웃
     </button>

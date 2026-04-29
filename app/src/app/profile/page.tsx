@@ -16,7 +16,7 @@ export default function ProfilePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/uploads/profile-portrait.jpg"
-                alt="치악산에서 팬플룻을 든 김춘홍 (꼬꼬맨)"
+                alt="치악산에서 팬플룻을 든 김춘흥 (꼬꼬맨)"
                 className="w-full h-full object-cover"
               />
             </div>

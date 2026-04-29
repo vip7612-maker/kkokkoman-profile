@@ -37,7 +37,15 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-[color:var(--color-line)] py-4 text-center text-xs text-[color:var(--color-ink-soft)]">
-        © {new Date().getFullYear()} {profile.name} · {profile.stageName}. All rights reserved.
+        © {new Date().getFullYear()}{" "}
+        <Link
+          href="/admin/login"
+          className="hover:text-[color:var(--color-wood)] transition"
+          aria-label="관리자 페이지"
+        >
+          {profile.name}
+        </Link>{" "}
+        · {profile.stageName}. All rights reserved.
       </div>
     </footer>
   );

@@ -44,7 +44,8 @@ export default async function AdminDashboard() {
         {recentRequests.length === 0 ? (
           <p className="text-sm text-[color:var(--color-ink-soft)] mt-3">아직 요청이 없습니다.</p>
         ) : (
-          <table className="mt-4 w-full text-sm">
+          <div className="mt-4 overflow-x-auto -mx-2 md:mx-0">
+          <table className="w-full text-sm min-w-[560px]">
             <thead className="text-left text-xs text-[color:var(--color-ink-soft)]">
               <tr><th className="py-2">기관</th><th>담당자</th><th>대상/인원</th><th>상태</th><th>일시</th></tr>
             </thead>
@@ -60,6 +61,7 @@ export default async function AdminDashboard() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>
