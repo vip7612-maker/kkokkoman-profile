@@ -20,7 +20,7 @@ export default function RequestPage() {
       <div className="mt-6 grid sm:grid-cols-3 gap-3 text-sm text-[color:var(--color-ink-soft)]">
         <Tip icon="mdi:lock-outline" text="입력 정보는 강사 이메일로만 전송됩니다." />
         <Tip icon="mdi:clock-outline" text="평균 1~2일 내 회신을 드립니다." />
-        <Tip icon="mdi:phone-outline" text="긴급 문의는 vip7612@gmail.com으로 보내주세요." />
+        <Tip icon="mdi:phone-outline" text="긴급 문의는 jaru1125@naver.com으로 보내주세요." />
       </div>
     </div>
   );

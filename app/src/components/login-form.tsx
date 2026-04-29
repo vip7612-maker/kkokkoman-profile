@@ -37,7 +37,7 @@ export function LoginForm() {
           name="email"
           type="email"
           required
-          defaultValue="vip7612@gmail.com"
+          defaultValue="jaru1125@naver.com"
           className="mt-1 w-full rounded-lg border border-[color:var(--color-line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[color:var(--color-beige-deep)]"
         />
       </label>

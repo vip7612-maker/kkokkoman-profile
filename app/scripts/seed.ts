@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 async function main() {
   // 기본 관리자 계정 시드 (.env의 ADMIN_EMAIL/ADMIN_PASSWORD)
-  const adminEmail = process.env.ADMIN_EMAIL ?? "vip7612@gmail.com";
+  const adminEmail = process.env.ADMIN_EMAIL ?? "jaru1125@naver.com";
   const adminPw = process.env.ADMIN_PASSWORD ?? "admin1234";
   const exist = await db
     .select()

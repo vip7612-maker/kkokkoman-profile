@@ -31,7 +31,7 @@ export function SiteFooter() {
             문의
           </div>
           <ul className="space-y-1.5 text-[color:var(--color-ink-soft)]">
-            <li className="flex items-center gap-2"><Icon icon="mdi:email-outline" />vip7612@gmail.com</li>
+            <li className="flex items-center gap-2"><Icon icon="mdi:email-outline" />jaru1125@naver.com</li>
             <li className="flex items-center gap-2"><Icon icon="mdi:map-marker-outline" />강원도 원주 외 전국 출강</li>
           </ul>
         </div>
