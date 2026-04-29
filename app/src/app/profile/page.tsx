@@ -12,8 +12,13 @@ export default function ProfilePage() {
       <div className="grid md:grid-cols-[260px_1fr] gap-10 items-start">
         <aside className="md:sticky md:top-24">
           <div className="card overflow-hidden">
-            <div className="aspect-square bg-gradient-to-br from-[color:var(--color-cream)] to-[color:var(--color-beige)]/50 grid place-items-center">
-              <Icon icon="mdi:flute" className="text-7xl text-[color:var(--color-wood)]/70" />
+            <div className="aspect-[3/4] bg-[color:var(--color-cream)] overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/uploads/profile-portrait.jpg"
+                alt="치악산에서 팬플룻을 든 김춘홍 (꼬꼬맨)"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="p-5">
               <div className="text-xs text-[color:var(--color-ink-soft)]">예명</div>

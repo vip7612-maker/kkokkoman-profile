@@ -44,4 +44,4 @@ next-env.d.ts
 /private/
 /local.db
 /local.db-journal
-/public/uploads/
+# /public/uploads/ 는 시드 이미지 포함 위해 커밋 허용

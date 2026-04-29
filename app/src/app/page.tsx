@@ -53,21 +53,15 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative">
-            <div className="aspect-[4/5] rounded-[28px] overflow-hidden border border-[color:var(--color-line)] shadow-[var(--shadow-pop)] bg-gradient-to-br from-[color:var(--color-cream)] to-[color:var(--color-beige)]/40 grid place-items-center">
-              <div className="text-center px-6">
-                <Icon
-                  icon="mdi:flute"
-                  className="mx-auto text-[120px] text-[color:var(--color-wood)]/70"
-                />
-                <p className="mt-4 font-display text-2xl text-[color:var(--color-wood)]">
-                  꼬꼬맨의 팬플룻
-                </p>
-                <p className="mt-1 text-sm text-[color:var(--color-ink-soft)]">
-                  사진 영역 · 추후 업로드
-                </p>
-              </div>
+            <div className="aspect-[4/5] rounded-[28px] overflow-hidden border border-[color:var(--color-line)] shadow-[var(--shadow-pop)] bg-[color:var(--color-cream)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/uploads/profile-hero.jpg"
+                alt="팬플룻을 들고 있는 김춘홍 (꼬꼬맨)"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="hidden md:block absolute -left-6 -bottom-6 card p-4 w-48 rotate-[-4deg]">
+            <div className="hidden md:block absolute -left-6 -bottom-6 card p-4 w-48 rotate-[-4deg] bg-white">
               <div className="flex items-center gap-2 text-[color:var(--color-wood)]">
                 <Icon icon="mdi:medal-outline" className="text-xl" />
                 <span className="font-semibold text-sm">국회의원 표창</span>
