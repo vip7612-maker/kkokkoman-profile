@@ -1,0 +1,1 @@
+ALTER TABLE `secure_files` ADD `is_public` integer DEFAULT false NOT NULL;

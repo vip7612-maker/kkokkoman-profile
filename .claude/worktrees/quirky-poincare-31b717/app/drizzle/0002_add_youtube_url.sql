@@ -1,0 +1,1 @@
+ALTER TABLE `cases` ADD `youtube_url` text;
